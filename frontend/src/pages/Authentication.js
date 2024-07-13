@@ -1,6 +1,8 @@
 import { json, redirect } from 'react-router-dom';
 import AuthForm from '../components/AuthForm';
 
+const server = process.env.REACT_APP_SERVER
+
 function AuthenticationPage() {
   return <AuthForm />;
 }
@@ -20,7 +22,7 @@ export async function action({request}){
     throw json({message: 'Unsupported mode!'}, {status: 422})
   }
   
-  const response = await fetch('http://localhost:8080/' + mode, {
+  const response = await fetch(`${server}/` + mode, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

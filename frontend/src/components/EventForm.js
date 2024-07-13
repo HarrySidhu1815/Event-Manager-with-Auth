@@ -10,6 +10,8 @@ import {
 import classes from './EventForm.module.css';
 import { getAuthToken } from '../utils/auth';
 
+const server = process.env.REACT_APP_SERVER
+
 function EventForm({ method, event }) {
   const data = useActionData();
   const navigate = useNavigate();
@@ -97,11 +99,11 @@ export async function action({ request, params }) {
     description: data.get('description'),
   };
 
-  let url = 'http://localhost:8080/events';
+  let url = `${server}/events`;
 
   if (method === 'PATCH') {
     const eventId = params.eventId;
-    url = 'http://localhost:8080/events/' + eventId;
+    url = `${server}/events/` + eventId;
   }
 
   const response = await fetch(url, {

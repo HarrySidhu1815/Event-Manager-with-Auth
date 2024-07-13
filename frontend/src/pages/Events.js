@@ -3,6 +3,8 @@ import { useLoaderData, json, defer, Await } from 'react-router-dom';
 
 import EventsList from '../components/EventsList';
 
+const server = process.env.REACT_APP_SERVER
+
 function EventsPage() {
   const { events } = useLoaderData();
 
@@ -18,7 +20,7 @@ function EventsPage() {
 export default EventsPage;
 
 async function loadEvents() {
-  const response = await fetch('http://localhost:8080/events');
+  const response = await fetch(`${server}/events`);
 
   if (!response.ok) {
     // return { isError: true, message: 'Could not fetch events.' };
